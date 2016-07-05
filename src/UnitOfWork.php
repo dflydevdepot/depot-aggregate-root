@@ -102,14 +102,22 @@ class UnitOfWork
 
     public function commit()
     {
-        foreach ($this->trackedAggregates as $trackedAggregateTypes) {
+        foreach ($this->trackedAggregates as $trackedAggregateIdx => $trackedAggregateTypes) {
             $aggregateType = $trackedAggregateTypes['contract'];
-            foreach ($trackedAggregateTypes['aggregates'] as $aggregate) {
-                $this->persist(
-                    $aggregateType,
-                    $this->aggregateManipulator->identify($aggregate),
-                    $aggregate
-                );
+            foreach ($trackedAggregateTypes['aggregates'] as $aggregateIdx => $aggregate) {
+                try {
+                    $this->persist(
+                        $aggregateType,
+                        $this->aggregateManipulator->identify($aggregate),
+                        $aggregate
+                    );
+                } catch (\Depot\EventStore\Persistence\OptimisticConcurrencyFailed $e) {
+                    // If this aggregate has an optimistic concurrency failure we should drop it
+                    // from our list of tracked aggregates.
+                    unset($this->trackedAggregates[$trackedAggregateIdx]['aggregates'][$aggregateIdx]);
+
+                    throw $e;
+                }
             }
         }
     }
