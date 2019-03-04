@@ -16,7 +16,6 @@
   },
   "require": {
     "php": "^7.1",
-    "depot/aggregate-root-support": "^0.0@dev",
     "depot/contract": "@dev",
     "depot/event-store": "@dev"
   },
@@ -26,6 +25,7 @@
     }
   },
   "require-dev": {
+    "depot/aggregate-root-support": "^0.0@dev",
     "depot/testing-fixtures": "^0.0@dev",
     "phpunit/phpunit": "^6.5",
     "squizlabs/php_codesniffer": "^2.3",
