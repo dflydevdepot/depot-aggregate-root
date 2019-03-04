@@ -15,6 +15,7 @@
     }
   },
   "require": {
+    "php": "^7.1",
     "depot/contract": "^0.0@dev",
     "depot/event-store": "^0.0@dev"
   },

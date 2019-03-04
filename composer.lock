@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "18154206fe4068118590c52e36060379",
+    "content-hash": "6e55f130324b18960a92a687a6c81c7c",
     "packages": [
         {
             "name": "depot/contract",
@@ -1897,6 +1897,8 @@
     },
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "php": "^7.1"
+    },
     "platform-dev": []
 }
