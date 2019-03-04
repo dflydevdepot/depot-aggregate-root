@@ -16,8 +16,9 @@
   },
   "require": {
     "php": "^7.1",
-    "depot/contract": "^0.0@dev",
-    "depot/event-store": "^0.0@dev"
+    "depot/aggregate-root-support": "^0.0@dev",
+    "depot/contract": "@dev",
+    "depot/event-store": "@dev"
   },
   "autoload-dev": {
     "psr-4": {
@@ -25,11 +26,11 @@
     }
   },
   "require-dev": {
-    "depot/monii-reflection-properties-serializer-event-store-serialization": "^0.0@dev",
     "depot/testing-fixtures": "^0.0@dev",
-    "monii/reflection-properties-serializer": "^0.0@dev",
     "phpunit/phpunit": "^6.5",
-    "squizlabs/php_codesniffer": "^2.3"
+    "squizlabs/php_codesniffer": "^2.3",
+    "depot/monii-reflection-properties-serializer-event-store-serialization": "^0.0@dev",
+    "monii/reflection-properties-serializer": "^0.0@dev"
   },
   "extra": {
     "branch-alias": {

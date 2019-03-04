@@ -4,8 +4,58 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6e55f130324b18960a92a687a6c81c7c",
+    "content-hash": "9635b9839b8382392014cafbc9e45880",
     "packages": [
+        {
+            "name": "depot/aggregate-root-support",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/depot/depot-aggregate-root-support.git",
+                "reference": "f195dee8b33da994f61052aad0774b46262d2e26"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/depot/depot-aggregate-root-support/zipball/f195dee8b33da994f61052aad0774b46262d2e26",
+                "reference": "f195dee8b33da994f61052aad0774b46262d2e26",
+                "shasum": ""
+            },
+            "require": {
+                "depot/aggregate-root": "^0.0@dev",
+                "depot/contract": "^0.0@dev",
+                "depot/event-store": "^0.0@dev",
+                "php": "^7.1"
+            },
+            "require-dev": {
+                "depot/testing-fixtures": "^0.0@dev",
+                "phpunit/phpunit": "^6.5",
+                "squizlabs/php_codesniffer": "^2.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Depot\\AggregateRoot\\Support\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Beau Simensen",
+                    "email": "beau@dflydev.com"
+                }
+            ],
+            "description": "Depot Support Implementation for Aggregate Roots",
+            "homepage": "http://depot.io",
+            "time": "2019-03-04T22:40:46+00:00"
+        },
         {
             "name": "depot/contract",
             "version": "dev-master",
@@ -192,13 +242,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/depot/depot-testing-fixtures.git",
-                "reference": "14c111d97b603e2a2848ae398e224fee0562c327"
+                "reference": "18257a382e1115e0d1c0231da47c209488253fce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/depot/depot-testing-fixtures/zipball/14c111d97b603e2a2848ae398e224fee0562c327",
-                "reference": "14c111d97b603e2a2848ae398e224fee0562c327",
+                "url": "https://api.github.com/repos/depot/depot-testing-fixtures/zipball/18257a382e1115e0d1c0231da47c209488253fce",
+                "reference": "18257a382e1115e0d1c0231da47c209488253fce",
                 "shasum": ""
+            },
+            "require-dev": {
+                "depot/contract": "^0.0@dev",
+                "depot/event-store": "^0.0@dev",
+                "depot/monii-reflection-properties-serializer-event-store-serialization": "^0.0@dev",
+                "monii/reflection-properties-serializer": "^0.0@dev"
             },
             "type": "library",
             "extra": {
@@ -223,7 +279,7 @@
             ],
             "description": "Testing Fixtures for Depot",
             "homepage": "http://depot.io",
-            "time": "2019-03-04T17:13:07+00:00"
+            "time": "2019-03-04T22:46:23+00:00"
         },
         {
             "name": "doctrine/instantiator",
@@ -1889,10 +1945,11 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "depot/aggregate-root-support": 20,
         "depot/contract": 20,
         "depot/event-store": 20,
-        "depot/monii-reflection-properties-serializer-event-store-serialization": 20,
         "depot/testing-fixtures": 20,
+        "depot/monii-reflection-properties-serializer-event-store-serialization": 20,
         "monii/reflection-properties-serializer": 20
     },
     "prefer-stable": false,
