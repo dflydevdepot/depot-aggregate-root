@@ -1,7 +1,7 @@
 <?php
 
 use Depot\AggregateRoot\ChangesClearing\PublicMethodChangesClearor;
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 
 class PublicMethodChangeClearorTest extends TestCase
 {
@@ -21,10 +21,9 @@ class PublicMethodChangeClearorTest extends TestCase
 
     }
 
-    /** @expectedException AggregateRootNotSupported */
     public function testUnhappyChangeClearorCalledOnce()
     {
-        $this->setExpectedException('Depot\AggregateRoot\Error\AggregateRootNotSupported');
+        $this->expectException(\Depot\AggregateRoot\Error\AggregateRootNotSupported::class);
         $object = new \DateTimeImmutable();
 
         $changeClearor = new PublicMethodChangesClearor();

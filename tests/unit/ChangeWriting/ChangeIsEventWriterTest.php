@@ -2,7 +2,7 @@
 
 use Depot\Testing\Fixtures\Banking\Account\AccountWasOpened;
 use Depot\AggregateRoot\ChangeWriting\ChangeIsEventWriter;
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 
 class ChangeIsEventWriterTest extends TestCase
 {

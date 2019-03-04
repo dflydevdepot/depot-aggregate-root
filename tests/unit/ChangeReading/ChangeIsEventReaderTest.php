@@ -2,7 +2,7 @@
 
 use Depot\Testing\Fixtures\Banking\Account\AccountWasOpened;
 use Depot\AggregateRoot\ChangeReading\ChangeIsEventReader;
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 
 class ChangeIsEventReaderTest extends TestCase
 {

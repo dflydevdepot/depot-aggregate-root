@@ -27,7 +27,7 @@ use Depot\Testing\Fixtures\Banking\Account\AccountBalanceDecreased;
 use Depot\Testing\Fixtures\Banking\Account\AccountBalanceIncreased;
 use Depot\Testing\Fixtures\Banking\Account\AccountWasOpened;
 use Depot\Testing\Fixtures\Banking\Common\BankingEventEnvelope;
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 
 class UnitOfWorkTest extends TestCase
 {

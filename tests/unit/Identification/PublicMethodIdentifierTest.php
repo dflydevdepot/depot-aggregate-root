@@ -4,7 +4,7 @@ namespace Depot\Testing\Unit\AggregateRoot\Identification;
 
 use Depot\AggregateRoot\Identification\PublicMethodIdentifier;
 use Depot\AggregateRoot\Support\Identification\AggregateRootIdentification;
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 
 class PublicMethoddentifierTest extends TestCase
 {

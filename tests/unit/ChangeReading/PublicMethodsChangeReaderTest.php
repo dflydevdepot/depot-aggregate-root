@@ -4,7 +4,7 @@ namespace Depot\Testing\Unit\AggregateRoot\ChangeReading;
 
 use Depot\AggregateRoot\ChangeReading\PublicMethodsChangeReader;
 use Depot\AggregateRoot\Support\ChangeReading\AggregateRootChangeReading;
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 
 class PublicMethodsChangeReaderTest extends TestCase
 {

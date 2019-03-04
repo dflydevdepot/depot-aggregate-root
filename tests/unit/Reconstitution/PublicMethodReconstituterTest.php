@@ -1,7 +1,7 @@
 <?php
 
 use Depot\AggregateRoot\Reconstitution\PublicMethodReconstituter;
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 
 class PublicMethodReconstituterTest extends TestCase
 {
@@ -16,10 +16,9 @@ class PublicMethodReconstituterTest extends TestCase
         $reconstituter->reconstitute($object, array());
     }
 
-    /** @expectedException AggregateRootNotSupported */
     public function testUnhappyReconstitution()
     {
-        $this->setExpectedException('Depot\AggregateRoot\Error\AggregateRootNotSupported');
+        $this->expectException(\Depot\AggregateRoot\Error\AggregateRootNotSupported::class);
         $object = new \DateTimeImmutable();
 
         $reconstituter = new PublicMethodReconstituter();

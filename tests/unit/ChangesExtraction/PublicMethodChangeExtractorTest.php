@@ -4,7 +4,7 @@ namespace Depot\Testing\Unit\AggregateRoot\ChangesExtraction;
 
 use Depot\AggregateRoot\ChangesExtraction\PublicMethodChangesExtractor;
 use Depot\AggregateRoot\Support\ChangesExtraction\AggregateRootChangesExtraction;
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 
 class PublicMethodChangeExtractorTest extends TestCase
 {

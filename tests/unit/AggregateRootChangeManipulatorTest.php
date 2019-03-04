@@ -11,7 +11,7 @@ use Depot\Testing\Fixtures\Banking\Account\AccountBalanceDecreased;
 use Depot\Testing\Fixtures\Banking\Account\AccountBalanceIncreased;
 use Depot\Testing\Fixtures\Banking\Account\AccountWasOpened;
 use Depot\Testing\Fixtures\Banking\Common\BankingEventEnvelope;
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 
 class AggregateRootChangeManipulatorTest extends TestCase
 {
@@ -82,6 +82,13 @@ class AggregateRootChangeManipulatorTest extends TestCase
         $eventEnvelope = BankingEventEnvelope::create(0, new AccountWasOpened('fixture-account-000', 50));
         $change = $this->getAggregateRootChangeManipulator()->writeChange($eventId, $event);
 
-        $this->assertEquals($eventEnvelope, $change);
+        $now = new \DateTimeImmutable('now');
+
+        $removeTime = function (BankingEventEnvelope $event) use ($now) {
+            return $event->withWhen($now);
+        };
+
+
+        $this->assertEquals($removeTime($eventEnvelope), $removeTime($change));
     }
 }

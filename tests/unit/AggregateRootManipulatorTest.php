@@ -14,7 +14,7 @@ use Depot\Testing\Fixtures\Banking\Account\AccountBalanceDecreased;
 use Depot\Testing\Fixtures\Banking\Account\AccountBalanceIncreased;
 use Depot\Testing\Fixtures\Banking\Account\AccountWasOpened;
 use Depot\Testing\Fixtures\Banking\Common\BankingEventEnvelope;
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 
 class AggregateRootManipulatorTest extends TestCase
 {
@@ -82,8 +82,26 @@ class AggregateRootManipulatorTest extends TestCase
 
         $bankingEventEnvelopes = $this->getAggregateRootManipulator()->extractChanges($account);
 
-        $this->assertEquals($this->getAccountFixtureBankingEventEnvelopes(), $bankingEventEnvelopes);
-        $this->assertEquals($this->getAccountFixtureBankingEventEnvelopes(), $bankingEventEnvelopes);
+        $now = new \DateTimeImmutable('now');
+
+        $removeTime = function (array $events) use ($now) {
+            $rewrittenEvents = [];
+            foreach ($events as $event) {
+                /** @var $event BankingEventEnvelope */
+
+                $rewrittenEvents[] = $event->withWhen($now);
+            }
+        };
+
+        $this->assertEquals(
+            $removeTime($this->getAccountFixtureBankingEventEnvelopes()),
+            $removeTime($bankingEventEnvelopes)
+        );
+
+        $this->assertEquals(
+            $removeTime($this->getAccountFixtureBankingEventEnvelopes()),
+            $removeTime($bankingEventEnvelopes)
+        );
     }
 
     public function testChangesClearing()
