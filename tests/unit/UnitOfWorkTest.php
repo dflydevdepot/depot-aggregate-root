@@ -3,17 +3,17 @@
 namespace Depot\Testing\Unit\AggregateRoot;
 
 use DateTimeImmutable;
-use Depot\AggregateRoot\AggregateRootChangeManipulator;
-use Depot\AggregateRoot\AggregateRootManipulator;
-use Depot\AggregateRoot\ChangeReading\PublicMethodsChangeReader;
-use Depot\AggregateRoot\ChangesClearing\PublicMethodChangesClearor;
-use Depot\AggregateRoot\ChangesExtraction\PublicMethodChangesExtractor;
-use Depot\AggregateRoot\ChangeWriting\NamedConstructorChangeWriter;
-use Depot\AggregateRoot\Identification\PublicMethodIdentifier;
-use Depot\AggregateRoot\Instantiation\NamedConstructorInstantiator;
-use Depot\AggregateRoot\Reconstitution\PublicMethodReconstituter;
+use Depot\AggregateRoot\ChangeManipulation\ChangeManipulator;
+use Depot\AggregateRoot\AggregateRootManipulation\AggregateRootManipulator;
+use Depot\AggregateRoot\ChangeManipulation\Reading\PublicMethodsChangeReader;
+use Depot\AggregateRoot\AggregateRootManipulation\ChangesClearing\PublicMethodChangesClearor;
+use Depot\AggregateRoot\AggregateRootManipulation\ChangesExtraction\PublicMethodChangesExtractor;
+use Depot\AggregateRoot\ChangeManipulation\Writing\NamedConstructorChangeWriter;
+use Depot\AggregateRoot\AggregateRootManipulation\Identification\PublicMethodIdentifier;
+use Depot\AggregateRoot\AggregateRootManipulation\Instantiation\NamedConstructorInstantiator;
+use Depot\AggregateRoot\AggregateRootManipulation\Reconstitution\PublicMethodReconstituter;
 use Depot\AggregateRoot\UnitOfWork;
-use Depot\AggregateRoot\VersionReading\PublicMethodVersionReader;
+use Depot\AggregateRoot\AggregateRootManipulation\VersionReading\PublicMethodVersionReader;
 use Depot\Contract\SimplePhpFqcnContractResolver;
 use Depot\EventStore\EventEnvelope;
 use Depot\EventStore\EventStore;
@@ -72,7 +72,7 @@ class UnitOfWorkTest extends TestCase
                 new PublicMethodChangesExtractor(),
                 new PublicMethodChangesClearor()
             ),
-            new AggregateRootChangeManipulator(
+            new ChangeManipulator(
                 new PublicMethodsChangeReader(),
                 new NamedConstructorChangeWriter(BankingEventEnvelope::class)
             ),
@@ -90,19 +90,19 @@ class UnitOfWorkTest extends TestCase
 
         $account->increaseBalance(6006, 100);
 
-        $this->assertcount(2, $account->getAggregateChanges());
+        $this->assertcount(2, $account->getAggregateRootChanges());
         $this->assertCount(0, $account->getCommittedEvents());
         $this->assertCount(2, $account->getHandledEvents());
 
         $this->unitOfWork->track($contract, 'fixture-account-201', $account);
 
-        $this->assertcount(2, $account->getAggregateChanges());
+        $this->assertcount(2, $account->getAggregateRootChanges());
         $this->assertCount(0, $account->getCommittedEvents());
         $this->assertCount(2, $account->getHandledEvents());
 
         $account->decreaseBalance(6007, 50);
 
-        $this->assertcount(3, $account->getAggregateChanges());
+        $this->assertcount(3, $account->getAggregateRootChanges());
         $this->assertCount(0, $account->getCommittedEvents());
         $this->assertCount(3, $account->getHandledEvents());
 
@@ -156,31 +156,31 @@ class UnitOfWorkTest extends TestCase
         /** @var Account $account */
         $account = $this->unitOfWork->get($contract, 'fixture-account-000');
 
-        $this->assertcount(0, $account->getAggregateChanges());
+        $this->assertcount(0, $account->getAggregateRootChanges());
         $this->assertCount(2, $account->getCommittedEvents());
         $this->assertCount(2, $account->getHandledEvents());
 
         $account->increaseBalance(1001, 302);
 
-        $this->assertcount(1, $account->getAggregateChanges());
+        $this->assertcount(1, $account->getAggregateRootChanges());
         $this->assertCount(2, $account->getCommittedEvents());
         $this->assertCount(3, $account->getHandledEvents());
 
         $account->decreaseBalance(1001, 301);
 
-        $this->assertcount(2, $account->getAggregateChanges());
+        $this->assertcount(2, $account->getAggregateRootChanges());
         $this->assertCount(2, $account->getCommittedEvents());
         $this->assertCount(4, $account->getHandledEvents());
 
         $account->decreaseBalance(1001, 201);
 
-        $this->assertcount(3, $account->getAggregateChanges());
+        $this->assertcount(3, $account->getAggregateRootChanges());
         $this->assertCount(2, $account->getCommittedEvents());
         $this->assertCount(5, $account->getHandledEvents());
 
         $this->unitOfWork->commit();
 
-        $this->assertcount(0, $account->getAggregateChanges());
+        $this->assertcount(0, $account->getAggregateRootChanges());
         $this->assertCount(5, $account->getCommittedEvents());
         $this->assertCount(5, $account->getHandledEvents());
     }

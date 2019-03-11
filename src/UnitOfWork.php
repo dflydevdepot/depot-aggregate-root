@@ -2,6 +2,8 @@
 
 namespace Depot\AggregateRoot;
 
+use Depot\AggregateRoot\AggregateRootManipulation\AggregateRootManipulator;
+use Depot\AggregateRoot\ChangeManipulation\ChangeManipulator;
 use Depot\AggregateRoot\Error\AggregateRootIsAlreadyTracked;
 use Depot\Contract\Contract;
 use Depot\Contract\ContractResolver;
@@ -23,7 +25,7 @@ class UnitOfWork
     private $aggregateManipulator;
 
     /**
-     * @var AggregateRootChangeManipulator
+     * @var ChangeManipulator
      */
     private $aggregateChangeManipulator;
 
@@ -50,7 +52,7 @@ class UnitOfWork
     public function __construct(
         EventStore $eventStore,
         AggregateRootManipulator $aggregateManipulator,
-        AggregateRootChangeManipulator $aggregateChangeManipulator,
+        ChangeManipulator $aggregateChangeManipulator,
         ContractResolver $eventContractResolver,
         ContractResolver $metadataContractResolver,
         EventIdGenerator $eventIdGenerator = null,
